@@ -1,0 +1,94 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  FARMER
+  BUYER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum Category {
+  VEGETABLES
+  FRUITS
+  DAIRY
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  password     String
+  name         String
+  role         Role      @default(BUYER)
+  farmName     String?   // For farmers
+  farmDetails  String?   // For farmers
+  address      String?   // For farmers and buyers
+  isBlocked    Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  // Relations
+  products     Product[] @relation("FarmerProducts")
+  orders       Order[]   @relation("BuyerOrders")
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  price       Float
+  unit        String      // e.g. "kg", "litre", "dozen"
+  category    Category
+  emoji       String      @default("🌾")
+  farmerId    String
+  farmer      User        @relation("FarmerProducts", fields: [farmerId], references: [id], onDelete: Cascade)
+  isBlocked   Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  buyerId    String
+  buyer      User        @relation("BuyerOrders", fields: [buyerId], references: [id], onDelete: Cascade)
+  totalPrice Float
+  status     OrderStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  
+  items      OrderItem[]
+}
+
+model OrderItem {
+  id              String   @id @default(uuid())
+  orderId         String
+  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product  @relation(fields: [productId], references: [id])
+  quantity        Float
+  priceAtPurchase Float
+  farmerId        String   // Track which farmer this item belongs to for order splits
+}
