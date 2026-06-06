@@ -65,32 +65,32 @@ export default async function BuyerDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A1A14] text-[#F2EDE4] font-sans flex flex-col">
+    <div className="min-h-screen bg-forest text-cream font-sans flex flex-col">
       {/* Header */}
-      <header className="bg-[#0A1A14] border-b border-solid border-[#2B5240]/25 px-6 py-4 flex items-center justify-between">
-        <Link href="/store" className="nav-logo text-xl font-serif text-[#F2EDE4] flex items-center gap-2">
+      <header className="bg-forest border-b border-solid border-fern/25 px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+        <Link href="/store" className="nav-logo text-xl font-serif text-cream flex items-center gap-2">
           <span className="logo-dot" /> Buyer Dashboard
         </Link>
-        <div className="flex items-center gap-4">
-          <Link href="/store" className="text-xs text-[#D4A853] hover:underline font-mono uppercase tracking-wider">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+          <Link href="/store" className="text-xs text-gold hover:underline font-mono uppercase tracking-wider">
             Marketplace
           </Link>
-          <span className="text-xs text-[#8FB89A]">
-            Buyer: <strong className="text-[#F2EDE4]">{user.name}</strong>
+          <span className="text-xs text-mist hidden sm:inline">
+            Buyer: <strong className="text-cream">{user.name}</strong>
           </span>
         </div>
       </header>
 
-      <main className="max-w-4xl w-full mx-auto p-6 md:p-8 space-y-8 flex-1">
+      <main className="max-w-4xl w-full mx-auto p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 flex-1">
         {/* Stats card */}
-        <div className="bg-[#112218] border border-solid border-[#2B5240]/20 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-sm">
+        <div className="bg-canopy border border-solid border-fern/20 p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 rounded-sm">
           <div>
-            <h1 className="font-serif text-3xl text-[#F2EDE4] mb-1">Purchases History</h1>
-            <p className="text-xs text-[#8FB89A]">Track your incoming shipments and review previous orders.</p>
+            <h1 className="font-serif text-2xl sm:text-3xl text-cream mb-1">Purchases History</h1>
+            <p className="text-xs text-mist">Track your incoming shipments and review previous orders.</p>
           </div>
-          <div className="bg-[#0A1A14] border border-solid border-[#2B5240]/30 px-6 py-4 rounded-sm flex flex-col items-end">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[#8FB89A]">Total Direct Investments</span>
-            <span className="text-2xl font-mono text-[#D4A853] font-bold mt-1">
+          <div className="bg-forest border border-solid border-fern/30 px-4 sm:px-6 py-3 sm:py-4 rounded-sm flex flex-col items-start sm:items-end">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-mist">Total Direct Investments</span>
+            <span className="text-2xl font-mono text-gold font-bold mt-1">
               ₹{totalSpent.toLocaleString('en-IN')}
             </span>
           </div>
@@ -98,14 +98,14 @@ export default async function BuyerDashboard() {
 
         {/* Orders list */}
         <div className="space-y-6">
-          <h2 className="font-serif text-xl border-b border-solid border-[#2B5240]/15 pb-3">Your Orders</h2>
+          <h2 className="font-serif text-xl border-b border-solid border-fern/15 pb-3">Your Orders</h2>
 
           {orders.length === 0 ? (
-            <div className="text-center py-20 bg-[#112218] border border-dashed border-[#2B5240]/20 rounded-sm text-[#8FB89A]">
+            <div className="text-center py-20 bg-canopy border border-dashed border-fern/20 rounded-sm text-mist">
               <p className="font-serif text-lg">You haven&apos;t placed any orders yet.</p>
               <Link
                 href="/store"
-                className="inline-block mt-4 bg-[#D4A853] hover:bg-[#D4A853]/90 text-[#0A1A14] px-6 py-2.5 text-xs font-mono uppercase tracking-wider"
+                className="inline-block mt-4 bg-gold hover:bg-gold/90 text-forest px-6 py-2.5 text-xs font-mono uppercase tracking-wider"
               >
                 Go to Marketplace
               </Link>
@@ -115,17 +115,17 @@ export default async function BuyerDashboard() {
               {orders.map((order) => (
                 <div
                   key={order.id}
-                  className="bg-[#112218] border border-solid border-[#2B5240]/20 p-6 rounded-sm space-y-4"
+                  className="bg-canopy border border-solid border-fern/20 p-4 sm:p-6 rounded-sm space-y-4"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-solid border-[#2B5240]/10 pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-solid border-fern/10 pb-3">
                     <div className="space-y-1">
-                      <div className="text-xs text-[#8FB89A]">
+                      <div className="text-xs text-mist">
                         Order ID:{' '}
-                        <span className="font-mono text-[#F2EDE4]">{order.id}</span>
+                        <span className="font-mono text-cream break-all">{order.id}</span>
                       </div>
-                      <div className="text-xs text-[#8FB89A]">
+                      <div className="text-xs text-mist">
                         Placed on:{' '}
-                        <span className="text-[#F2EDE4]">
+                        <span className="text-cream">
                           {new Date(order.createdAt).toLocaleDateString('en-IN', {
                             day: 'numeric',
                             month: 'long',
@@ -157,7 +157,7 @@ export default async function BuyerDashboard() {
                   </div>
 
                   {/* Order items */}
-                  <div className="divide-y divide-solid divide-[#2B5240]/10">
+                  <div className="divide-y divide-solid divide-fern/10">
                     {order.items.map((item) => (
                       <div
                         key={item.id}
@@ -166,32 +166,32 @@ export default async function BuyerDashboard() {
                         <div className="flex items-center gap-3">
                           <span className="text-2xl">{item.product.emoji}</span>
                           <div>
-                            <div className="text-sm font-medium text-[#F2EDE4]">
+                            <div className="text-sm font-medium text-cream">
                               {item.product.name}
                             </div>
-                            <div className="text-[10px] text-[#8FB89A]">
+                            <div className="text-[10px] text-mist">
                               Grown by:{' '}
-                              <span className="text-[#D4A853]">
+                              <span className="text-gold">
                                 {item.product.farmer.farmName ||
                                   item.product.farmer.name}
                               </span>
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-6 justify-between sm:justify-end">
-                          <div className="text-xs text-[#8FB89A]">
+                        <div className="flex items-center gap-4 sm:gap-6 justify-between sm:justify-end">
+                          <div className="text-xs text-mist">
                             Qty:{' '}
-                            <span className="font-mono text-[#F2EDE4]">
+                            <span className="font-mono text-cream">
                               {item.quantity}
                             </span>
                           </div>
-                          <div className="text-xs text-[#8FB89A]">
+                          <div className="text-xs text-mist">
                             Price:{' '}
-                            <span className="font-mono text-[#F2EDE4]">
+                            <span className="font-mono text-cream">
                               ₹{item.priceAtPurchase}
                             </span>
                           </div>
-                          <div className="font-mono text-sm text-[#D4A853]">
+                          <div className="font-mono text-sm text-gold">
                             ₹{(item.quantity * item.priceAtPurchase).toLocaleString('en-IN')}
                           </div>
                         </div>
@@ -200,9 +200,9 @@ export default async function BuyerDashboard() {
                   </div>
 
                   {/* Total */}
-                  <div className="border-t border-solid border-[#2B5240]/15 pt-3 flex justify-between items-center font-mono">
-                    <span className="text-xs text-[#8FB89A]">Order Total:</span>
-                    <span className="text-base text-[#D4A853] font-bold">
+                  <div className="border-t border-solid border-fern/15 pt-3 flex justify-between items-center font-mono">
+                    <span className="text-xs text-mist">Order Total:</span>
+                    <span className="text-base text-gold font-bold">
                       ₹{order.totalPrice.toLocaleString('en-IN')}
                     </span>
                   </div>
