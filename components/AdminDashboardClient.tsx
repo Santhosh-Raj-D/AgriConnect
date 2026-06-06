@@ -89,15 +89,15 @@ export default function AdminDashboardClient({
   return (
     <div className="min-h-screen bg-forest text-cream font-sans flex flex-col">
       {/* Header */}
-      <header className="bg-canopy border-b border-solid border-fern/25 px-6 py-4 flex items-center justify-between">
+      <header className="bg-canopy border-b border-solid border-fern/25 px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
         <Link href="/" className="nav-logo text-xl font-serif text-cream flex items-center gap-2">
           <span className="logo-dot" /> Admin Operations
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
           <Link href="/store" className="text-xs text-gold hover:underline font-mono uppercase tracking-wider">
             Marketplace
           </Link>
-          <span className="text-xs text-mist">
+          <span className="text-xs text-mist hidden sm:inline">
             Role: <strong className="text-cream">Platform Administrator</strong>
           </span>
           <button
@@ -109,9 +109,9 @@ export default function AdminDashboardClient({
         </div>
       </header>
 
-      <main className="max-w-6xl w-full mx-auto p-6 md:p-8 space-y-8 flex-1">
+      <main className="max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 flex-1">
         {/* Statistics Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
           <div className="bg-canopy border border-solid border-fern/20 p-5 rounded-sm">
             <span className="text-[10px] font-mono uppercase tracking-widest text-mist">Farmers</span>
             <div className="text-3xl font-serif text-gold mt-2">{counts.farmers}</div>
@@ -134,7 +134,7 @@ export default function AdminDashboardClient({
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-solid border-fern/20 gap-4">
+        <div className="flex border-b border-solid border-fern/20 gap-4 overflow-x-auto scrollbar-hide">
           <button
             onClick={() => setActiveTab('users')}
             className={`pb-4 px-2 text-xs font-mono uppercase tracking-wider border-b-2 transition-all ${
@@ -169,10 +169,10 @@ export default function AdminDashboardClient({
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search user name or email..."
-                  className="bg-canopy border border-solid border-fern/40 focus:border-gold outline-none text-xs px-4 py-2.5 text-cream w-[240px]"
+                  className="bg-canopy border border-solid border-fern/40 focus:border-gold outline-none text-xs px-4 py-2.5 text-cream w-full sm:w-[240px]"
                 />
 
-                <div className="flex border border-solid border-fern/40">
+                <div className="flex flex-wrap border border-solid border-fern/40">
                   {(['ALL', 'FARMER', 'BUYER'] as const).map((role) => (
                     <button
                       key={role}

@@ -158,15 +158,15 @@ export default function FarmerDashboardClient({
   return (
     <div className="min-h-screen bg-forest text-cream font-sans flex flex-col">
       {/* Header */}
-      <header className="bg-forest border-b border-solid border-fern/25 px-6 py-4 flex items-center justify-between">
+      <header className="bg-forest border-b border-solid border-fern/25 px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
         <Link href="/" className="nav-logo text-xl font-serif text-cream flex items-center gap-2">
           <span className="logo-dot" /> Farmer Operations
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
           <Link href="/store" className="text-xs text-gold hover:underline font-mono uppercase tracking-wider">
             Marketplace
           </Link>
-          <span className="text-xs text-mist">
+          <span className="text-xs text-mist hidden sm:inline">
             Farm: <strong className="text-cream">{user.farmName || user.name}</strong>
           </span>
           <button
@@ -178,9 +178,9 @@ export default function FarmerDashboardClient({
         </div>
       </header>
 
-      <main className="max-w-6xl w-full mx-auto p-6 md:p-8 space-y-8 flex-1">
+      <main className="max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 flex-1">
         {/* Top Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           <div className="bg-canopy border border-solid border-fern/20 p-6 rounded-sm">
             <span className="text-[10px] font-mono uppercase tracking-widest text-mist">Active Listings</span>
             <div className="text-3xl font-serif text-gold mt-2">{totalProducts}</div>
@@ -203,7 +203,7 @@ export default function FarmerDashboardClient({
         </div>
 
         {/* Dashboard Tabs & Navigation */}
-        <div className="flex border-b border-solid border-fern/20 gap-4">
+        <div className="flex border-b border-solid border-fern/20 gap-4 overflow-x-auto scrollbar-hide">
           <button
             onClick={() => setActiveTab('listings')}
             className={`pb-4 px-2 text-xs font-mono uppercase tracking-wider border-b-2 transition-all ${
@@ -463,8 +463,8 @@ export default function FarmerDashboardClient({
 
       {/* MODAL 1: ADD PRODUCT */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-forest/85 backdrop-blur-sm flex items-center justify-center z-50 p-6">
-          <div className="w-full max-w-md bg-canopy border border-solid border-fern/40 p-6 rounded-sm shadow-2xl relative">
+        <div className="fixed inset-0 bg-forest/85 backdrop-blur-sm flex items-center justify-center z-50 p-4 sm:p-6">
+          <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-canopy border border-solid border-fern/40 p-5 sm:p-6 rounded-sm shadow-2xl relative">
             <h3 className="font-serif text-lg text-cream mb-6">List New Produce</h3>
 
             {error && <div className="text-red-200 bg-red-950/40 border border-solid border-red-700/60 p-3 text-xs mb-4">{error}</div>}
@@ -574,8 +574,8 @@ export default function FarmerDashboardClient({
 
       {/* MODAL 2: EDIT PRODUCT */}
       {editingProduct && (
-        <div className="fixed inset-0 bg-forest/85 backdrop-blur-sm flex items-center justify-center z-50 p-6">
-          <div className="w-full max-w-md bg-canopy border border-solid border-fern/40 p-6 rounded-sm shadow-2xl relative">
+        <div className="fixed inset-0 bg-forest/85 backdrop-blur-sm flex items-center justify-center z-50 p-4 sm:p-6">
+          <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-canopy border border-solid border-fern/40 p-5 sm:p-6 rounded-sm shadow-2xl relative">
             <h3 className="font-serif text-lg text-cream mb-6">Modify Listed Produce</h3>
 
             {error && <div className="text-red-200 bg-red-950/40 border border-solid border-red-700/60 p-3 text-xs mb-4">{error}</div>}

@@ -114,12 +114,12 @@ export default function Storefront({ products, user }: StorefrontProps) {
   return (
     <div className="min-h-screen bg-forest text-[#F2EDE4] font-sans flex flex-col">
       {/* Store Header */}
-      <header className="sticky top-0 bg-forest/90 backdrop-filter blur-md border-b border-solid border-fern/25 z-40 px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="nav-logo text-xl font-serif text-cream flex items-center gap-2">
-          <span className="logo-dot" /> Agriconnect Marketplace
+      <header className="sticky top-0 bg-forest/90 backdrop-filter blur-md border-b border-solid border-fern/25 z-40 px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+        <Link href="/" className="nav-logo text-lg sm:text-xl font-serif text-cream flex items-center gap-2">
+          <span className="logo-dot" /> Agriconnect
         </Link>
-        <div className="flex items-center gap-4">
-          <span className="text-xs text-mist">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+          <span className="text-xs text-mist hidden sm:inline">
             Logged in as <strong className="text-cream">{user.name}</strong> ({user.role.toLowerCase()})
           </span>
           {user.role === 'BUYER' && (
@@ -148,7 +148,7 @@ export default function Storefront({ products, user }: StorefrontProps) {
 
       <div className="flex-1 flex flex-col lg:flex-row">
         {/* Marketplace Grid */}
-        <main className="flex-1 p-6 lg:p-8 space-y-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <h1 className="font-serif text-3xl text-cream">Direct Marketplace</h1>
@@ -162,10 +162,10 @@ export default function Storefront({ products, user }: StorefrontProps) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search produce, farmer, or region..."
-                className="bg-canopy border border-solid border-fern/40 focus:border-gold outline-none text-xs px-4 py-2.5 text-cream w-[240px]"
+                className="bg-canopy border border-solid border-fern/40 focus:border-gold outline-none text-xs px-4 py-2.5 text-cream w-full sm:w-[240px]"
               />
 
-              <div className="flex border border-solid border-fern/40">
+              <div className="flex flex-wrap border border-solid border-fern/40">
                 {(['ALL', 'VEGETABLES', 'FRUITS', 'DAIRY'] as const).map((cat) => (
                   <button
                     key={cat}
@@ -189,7 +189,7 @@ export default function Storefront({ products, user }: StorefrontProps) {
               <p className="text-xs mt-1">Try resetting your search criteria.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {filteredProducts.map((p) => (
                 <div
                   key={p.id}
@@ -233,7 +233,7 @@ export default function Storefront({ products, user }: StorefrontProps) {
 
         {/* Shopping Cart Drawer */}
         {user.role === 'BUYER' && (
-          <aside className="w-full lg:w-[350px] bg-canopy border-t lg:border-t-0 lg:border-l border-solid border-fern/25 p-6 flex flex-col justify-between sticky top-[65px] h-[calc(100vh-65px)] overflow-y-auto">
+          <aside className="w-full lg:w-[350px] bg-canopy border-t lg:border-t-0 lg:border-l border-solid border-fern/25 p-4 sm:p-6 flex flex-col justify-between lg:sticky lg:top-[65px] lg:h-[calc(100vh-65px)] lg:overflow-y-auto">
             <div>
               <h2 className="font-serif text-xl text-cream mb-6 flex items-center justify-between">
                 <span>Basket</span>
